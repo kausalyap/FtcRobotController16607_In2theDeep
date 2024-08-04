@@ -36,9 +36,9 @@ import TrcCommonLib.trclib.TrcPidDrive;
 import TrcCommonLib.trclib.TrcPurePursuitDrive;
 import TrcCommonLib.trclib.TrcSwerveDriveBase;
 import TrcCommonLib.trclib.TrcSwerveModule;
-import TrcFtcLib.ftclib.FtcAnalogEncoder;
-import TrcFtcLib.ftclib.FtcCRServo;
-import TrcFtcLib.ftclib.FtcDcMotor;
+import ftclib.FtcAnalogEncoder;
+import ftclib.FtcCRServo;
+import ftclib.FtcDcMotor;
 import teamcode.RobotParams;
 
 /**

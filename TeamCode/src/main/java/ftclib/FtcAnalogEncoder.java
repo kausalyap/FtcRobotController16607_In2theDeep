@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import TrcCommonLib.trclib.TrcAnalogInput;
 import TrcCommonLib.trclib.TrcCardinalConverter;
@@ -34,7 +34,7 @@ import TrcCommonLib.trclib.TrcFilter;
  */
 public class FtcAnalogEncoder implements TrcEncoder
 {
-    private final FtcAnalogInput analogInput;
+    private final ftclib.FtcAnalogInput analogInput;
     private final TrcCardinalConverter<TrcAnalogInput.DataType> cardinalConverter;
     private double sign = 1.0;
     private double scale = 1.0;
@@ -50,7 +50,7 @@ public class FtcAnalogEncoder implements TrcEncoder
      */
     public FtcAnalogEncoder(String instanceName, TrcFilter[]filters)
     {
-        analogInput = new FtcAnalogInput(instanceName, filters);
+        analogInput = new ftclib.FtcAnalogInput(instanceName, filters);
         cardinalConverter = new TrcCardinalConverter<TrcAnalogInput.DataType>(
             instanceName, analogInput, TrcAnalogInput.DataType.NORMALIZED_DATA);
         cardinalConverter.setCardinalRange(0, 0.0, 1.0);

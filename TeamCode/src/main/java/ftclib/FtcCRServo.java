@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import com.qualcomm.robotcore.hardware.CRServoImplEx;
 import com.qualcomm.robotcore.hardware.DcMotorSimple;

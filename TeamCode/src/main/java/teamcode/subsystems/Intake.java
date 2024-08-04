@@ -23,7 +23,7 @@
 package teamcode.subsystems;
 
 import TrcCommonLib.trclib.TrcEvent;
-import TrcFtcLib.ftclib.FtcDcMotor;
+import ftclib.FtcDcMotor;
 import teamcode.RobotParams;
 
 public class Intake

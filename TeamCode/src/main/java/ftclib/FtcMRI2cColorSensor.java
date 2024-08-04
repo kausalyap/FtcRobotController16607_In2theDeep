@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -34,7 +34,7 @@ import TrcCommonLib.trclib.TrcUtil;
  * This class implements the Modern Robotics Color Sensor extending FtcMRI2cDevice that implements the common
  * features of all Modern Robotics I2C devices.
  */
-public class FtcMRI2cColorSensor extends FtcMRI2cDevice implements TrcSensor.DataSource<FtcMRI2cColorSensor.DataType>
+public class FtcMRI2cColorSensor extends ftclib.FtcMRI2cDevice implements TrcSensor.DataSource<FtcMRI2cColorSensor.DataType>
 {
     public enum DataType
     {

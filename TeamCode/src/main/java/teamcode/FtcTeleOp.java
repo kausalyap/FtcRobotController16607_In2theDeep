@@ -33,8 +33,8 @@ import TrcCommonLib.trclib.TrcGameController;
 import TrcCommonLib.trclib.TrcPose2D;
 import TrcCommonLib.trclib.TrcRobot;
 import TrcCommonLib.trclib.TrcTimer;
-import TrcFtcLib.ftclib.FtcGamepad;
-import TrcFtcLib.ftclib.FtcOpMode;
+import ftclib.FtcGamepad;
+import ftclib.FtcOpMode;
 import teamcode.drivebases.SwerveDrive;
 
 /**

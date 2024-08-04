@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;

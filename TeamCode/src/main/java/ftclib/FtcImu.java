@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import com.qualcomm.hardware.rev.RevHubOrientationOnRobot;
 import com.qualcomm.robotcore.hardware.HardwareMap;

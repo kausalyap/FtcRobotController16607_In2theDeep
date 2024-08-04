@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import android.hardware.Sensor;
 
@@ -35,7 +35,7 @@ import TrcCommonLib.trclib.TrcTimer;
  */
 public class FtcAndroidGyro extends TrcGyro
 {
-    private final FtcAndroidSensor sensor;
+    private final ftclib.FtcAndroidSensor sensor;
 
     /**
      * Constructor: Creates an instance of the object.
@@ -47,7 +47,7 @@ public class FtcAndroidGyro extends TrcGyro
     public FtcAndroidGyro(String instanceName, TrcFilter[] filters)
     {
         super(instanceName, 3, GYRO_HAS_X_AXIS | GYRO_HAS_Y_AXIS | GYRO_HAS_Z_AXIS | GYRO_INTEGRATE, filters);
-        sensor = new FtcAndroidSensor(instanceName, Sensor.TYPE_GYROSCOPE, 3);
+        sensor = new ftclib.FtcAndroidSensor(instanceName, Sensor.TYPE_GYROSCOPE, 3);
     }   //FtcAndroidGyro
 
     /**

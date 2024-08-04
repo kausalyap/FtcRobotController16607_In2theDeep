@@ -31,6 +31,7 @@ import TrcCommonLib.trclib.TrcMotor;
 import TrcCommonLib.trclib.TrcRobot;
 import TrcCommonLib.trclib.TrcStateMachine;
 import TrcCommonLib.trclib.TrcTimer;
+import ftclib.FtcDcMotor;
 
 /**
  * This class implements the drive base motors test. This test will spin each of the drive base motors at the
@@ -63,7 +64,7 @@ public class CmdDriveMotorsTest implements TrcRobot.RobotCommand
      * @param driveTime specifies the amount of drive time in seconds.
      * @param drivePower specifies the motor power.
      */
-    public CmdDriveMotorsTest(TrcMotor[] motors, double driveTime, double drivePower)
+    public CmdDriveMotorsTest(FtcDcMotor[] motors, double driveTime, double drivePower)
     {
         this.motors = motors;
         this.driveTime = driveTime;

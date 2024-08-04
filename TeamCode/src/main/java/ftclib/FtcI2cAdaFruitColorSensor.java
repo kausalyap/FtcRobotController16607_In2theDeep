@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import com.qualcomm.robotcore.hardware.HardwareDevice;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -34,7 +34,7 @@ import TrcCommonLib.trclib.TrcUtil;
 /**
  * This class implements the AdaFruit Color Sensor extending FtcI2cDevice.
  */
-public class FtcI2cAdaFruitColorSensor extends FtcI2cDevice
+public class FtcI2cAdaFruitColorSensor extends ftclib.FtcI2cDevice
                                        implements TrcSensor.DataSource<FtcI2cAdaFruitColorSensor.DataType>
 {
     public enum DataType

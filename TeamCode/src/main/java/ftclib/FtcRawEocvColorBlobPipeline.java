@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import org.opencv.core.Mat;
 import org.openftc.easyopencv.OpenCvPipeline;

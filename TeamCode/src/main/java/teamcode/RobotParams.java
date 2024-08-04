@@ -33,7 +33,7 @@ import TrcCommonLib.trclib.TrcHomographyMapper;
 import TrcCommonLib.trclib.TrcPidController;
 import TrcCommonLib.trclib.TrcPose2D;
 import TrcCommonLib.trclib.TrcUtil;
-import TrcFtcLib.ftclib.FtcGamepad;
+import ftclib.FtcGamepad;
 
 /**
  * This class contains robot and subsystem constants and parameters.

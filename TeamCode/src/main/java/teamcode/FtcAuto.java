@@ -32,11 +32,11 @@ import TrcCommonLib.trclib.TrcDbgTrace;
 import TrcCommonLib.trclib.TrcPose2D;
 import TrcCommonLib.trclib.TrcRobot;
 import TrcCommonLib.trclib.TrcTimer;
-import TrcFtcLib.ftclib.FtcChoiceMenu;
-import TrcFtcLib.ftclib.FtcMatchInfo;
-import TrcFtcLib.ftclib.FtcMenu;
-import TrcFtcLib.ftclib.FtcOpMode;
-import TrcFtcLib.ftclib.FtcValueMenu;
+import ftclib.FtcChoiceMenu;
+import ftclib.FtcMatchInfo;
+import ftclib.FtcMenu;
+import ftclib.FtcOpMode;
+import ftclib.FtcValueMenu;
 import teamcode.autocommands.CmdAuto;
 
 /**

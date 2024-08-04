@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
@@ -31,7 +31,7 @@ import TrcCommonLib.trclib.TrcSerialBusDevice;
  */
 public class FtcI2cDevice extends TrcSerialBusDevice
 {
-    protected FtcI2cDeviceSynch deviceSynch;
+    protected ftclib.FtcI2cDeviceSynch deviceSynch;
 
     /**
      * Constructor: Creates an instance of the object.
@@ -46,7 +46,7 @@ public class FtcI2cDevice extends TrcSerialBusDevice
         HardwareMap hardwareMap, String instanceName, int i2cAddress, boolean addressIs7Bit, boolean useRequestQueue)
     {
         super(instanceName, useRequestQueue);
-        deviceSynch = hardwareMap.get(FtcI2cDeviceSynch.class, instanceName);
+        deviceSynch = hardwareMap.get(ftclib.FtcI2cDeviceSynch.class, instanceName);
         deviceSynch.setI2cAddress(i2cAddress, addressIs7Bit);
     }   //FtcI2cDevice
 

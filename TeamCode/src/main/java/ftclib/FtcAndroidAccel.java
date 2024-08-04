@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import android.hardware.Sensor;
 import android.hardware.SensorManager;
@@ -36,7 +36,7 @@ import TrcCommonLib.trclib.TrcTimer;
  */
 public class FtcAndroidAccel extends TrcAccelerometer
 {
-    private final FtcAndroidSensor sensor;
+    private final ftclib.FtcAndroidSensor sensor;
     private int samplingPeriod = SensorManager.SENSOR_DELAY_GAME;
 
     /**
@@ -51,7 +51,7 @@ public class FtcAndroidAccel extends TrcAccelerometer
         super(instanceName, 3,
               ACCEL_HAS_X_AXIS | ACCEL_HAS_Y_AXIS | ACCEL_HAS_Z_AXIS | ACCEL_INTEGRATE | ACCEL_DOUBLE_INTEGRATE,
               filters);
-        sensor = new FtcAndroidSensor(instanceName, Sensor.TYPE_LINEAR_ACCELERATION, 3);
+        sensor = new ftclib.FtcAndroidSensor(instanceName, Sensor.TYPE_LINEAR_ACCELERATION, 3);
     }   //FtcAndroidAccel
 
     /**

@@ -32,10 +32,10 @@ import TrcCommonLib.trclib.TrcMotor;
 import TrcCommonLib.trclib.TrcSensor;
 import TrcCommonLib.trclib.TrcTimer;
 import TrcCommonLib.trclib.TrcTriggerThresholdZones;
-import TrcFtcLib.ftclib.FtcDistanceSensor;
-import TrcFtcLib.ftclib.FtcMotorActuator;
-import TrcFtcLib.ftclib.FtcServo;
-import TrcFtcLib.ftclib.FtcServoActuator;
+import ftclib.FtcDistanceSensor;
+import ftclib.FtcMotorActuator;
+import ftclib.FtcServo;
+import ftclib.FtcServoActuator;
 import teamcode.RobotParams;
 
 public class ElevatorArm implements TrcExclusiveSubsystem

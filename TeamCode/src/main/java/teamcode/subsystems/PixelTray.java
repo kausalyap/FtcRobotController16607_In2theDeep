@@ -24,7 +24,7 @@ package teamcode.subsystems;
 
 import TrcCommonLib.trclib.TrcDbgTrace;
 import TrcCommonLib.trclib.TrcEvent;
-import TrcFtcLib.ftclib.FtcServo;
+import ftclib.FtcServo;
 import teamcode.RobotParams;
 
 public class PixelTray

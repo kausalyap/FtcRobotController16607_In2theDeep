@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import java.util.Date;
 
@@ -72,8 +72,7 @@ public class FtcMatchInfo
         // Construct menus.
         //
         FtcChoiceMenu<MatchType> matchTypeMenu = new FtcChoiceMenu<>("Match type:", null);
-        FtcValueMenu matchNumberMenu = new FtcValueMenu(
-            "Match number:", matchTypeMenu, 1.0, 50.0, 1.0, 1.0, "%.0f");
+        ftclib.FtcValueMenu matchNumberMenu = new ftclib.FtcValueMenu("Match number:", matchTypeMenu, 1.0, 50.0, 1.0, 1.0, "%.0f");
         //
         // Populate choice menus.
         //

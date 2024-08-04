@@ -26,8 +26,8 @@ import TrcCommonLib.trclib.TrcDriveBase;
 import TrcCommonLib.trclib.TrcPidDrive;
 import TrcCommonLib.trclib.TrcPurePursuitDrive;
 import TrcCommonLib.trclib.TrcUtil;
-import TrcFtcLib.ftclib.FtcDcMotor;
-import TrcFtcLib.ftclib.FtcImu;
+import ftclib.FtcDcMotor;
+import ftclib.FtcImu;
 import teamcode.RobotParams;
 
 /**

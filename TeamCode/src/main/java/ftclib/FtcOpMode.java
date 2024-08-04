@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import com.qualcomm.hardware.lynx.LynxModule;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
@@ -40,6 +40,7 @@ import TrcCommonLib.trclib.TrcRobot;
 import TrcCommonLib.trclib.TrcTaskMgr;
 import TrcCommonLib.trclib.TrcTimer;
 import TrcCommonLib.trclib.TrcWatchdogMgr;
+import ftclib.FtcDashboard;
 
 /**
  * This class implements a cooperative multi-tasking scheduler extending LinearOpMode.
@@ -72,7 +73,7 @@ public abstract class FtcOpMode extends LinearOpMode implements TrcRobot.RobotMo
     {
         super();
         // By default, global tracer message level is INFO. It can be changed by calling setTraceMessageLevel.
-        globalTracer = new TrcDbgTrace(moduleName, "GlobalTracer", new FtcDbgLog());
+        globalTracer = new TrcDbgTrace(moduleName, "GlobalTracer", new ftclib.FtcDbgLog());
         instance = this;
         try
         {

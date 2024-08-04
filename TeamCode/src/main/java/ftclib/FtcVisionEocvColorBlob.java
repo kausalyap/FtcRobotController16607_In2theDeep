@@ -21,7 +21,7 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import org.opencv.core.Point;
 
@@ -48,7 +48,7 @@ public class FtcVisionEocvColorBlob
         boolean validateTarget(TrcVisionTargetInfo<TrcOpenCvColorBlobPipeline.DetectedObject> objInfo);
     }   //interface FilterTarget
 
-    private final FtcEocvColorBlobProcessor colorBlobProcessor;
+    private final ftclib.FtcEocvColorBlobProcessor colorBlobProcessor;
     private final TrcDbgTrace tracer;
     private final String instanceName;
     private final TrcHomographyMapper homographyMapper;
@@ -76,7 +76,7 @@ public class FtcVisionEocvColorBlob
         TrcHomographyMapper.Rectangle cameraRect, TrcHomographyMapper.Rectangle worldRect, boolean annotate)
     {
         // Create the Color Blob processor.
-        colorBlobProcessor = new FtcEocvColorBlobProcessor(
+        colorBlobProcessor = new ftclib.FtcEocvColorBlobProcessor(
             instanceName, colorConversion, colorThresholds, filterContourParams, externalContourOnly);
         tracer = colorBlobProcessor.getTracer();
         this.instanceName = instanceName;
@@ -131,7 +131,7 @@ public class FtcVisionEocvColorBlob
      *
      * @return ColorBlob vision processor.
      */
-    public FtcEocvColorBlobProcessor getVisionProcessor()
+    public ftclib.FtcEocvColorBlobProcessor getVisionProcessor()
     {
         return colorBlobProcessor;
     }   //getVisionProcessor

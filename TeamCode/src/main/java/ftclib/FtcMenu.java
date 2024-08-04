@@ -20,9 +20,10 @@
  * SOFTWARE.
  */
 
-package TrcFtcLib.ftclib;
+package ftclib;
 
 import TrcCommonLib.trclib.TrcTimer;
+import ftclib.FtcDashboard;
 
 /**
  * This class is intended to be inherited by a specific menu class such as FtcChoiceMenu or FtcValueMenu. Therefore,
@@ -142,7 +143,7 @@ public abstract class FtcMenu
     private static final int MENUBUTTON_ALT_DOWN        = (1 << 5);
 
     protected final FtcDashboard dashboard;
-    private final FtcOpMode opMode;
+    private final ftclib.FtcOpMode opMode;
     private final String menuTitle;
     private final FtcMenu parent;
     private final MenuButtons menuButtons;
@@ -166,7 +167,7 @@ public abstract class FtcMenu
         }
 
         dashboard = FtcDashboard.getInstance();
-        opMode = FtcOpMode.getInstance();
+        opMode = ftclib.FtcOpMode.getInstance();
         this.menuTitle = menuTitle;
         this.parent = parent;
         this.menuButtons = menuButtons;
@@ -215,7 +216,7 @@ public abstract class FtcMenu
      */
     public static void walkMenuTree(FtcMenu rootMenu)
     {
-        FtcOpMode opmode = FtcOpMode.getInstance();
+        ftclib.FtcOpMode opmode = ftclib.FtcOpMode.getInstance();
 
         setRootMenu(rootMenu);
         rootMenu.displayMenu();
