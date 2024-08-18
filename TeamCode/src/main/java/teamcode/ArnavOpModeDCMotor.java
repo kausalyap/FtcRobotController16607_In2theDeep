@@ -228,7 +228,7 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
 
             Mecanumdrive();
 
-            /** servo open and close */
+            /** servo open and close and positions */
 
             if (gamepad2.a) {
                 Test.setPosition(0);
