@@ -14,13 +14,15 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
     //private DistanceSensor sensorColorRange;
 
     private DcMotor LadderLift;
+    private DcMotor Hook;
     private DcMotor Frontright;
     private DcMotor Frontleft;
     private DcMotor Backleft;
     private DcMotor Backright;
 
     private Servo Test;
-
+    private Servo Drone;
+    private Servo Servoarm;
     static final double INCREMENT = 0.01;
     static final int    CYCLE_MS  =   50;
     static final double MAX_FWD   =  1.0;
@@ -33,12 +35,18 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
 
     public void init_motors() {
         Test = hardwareMap.get(Servo.class, "Test");
+        Servoarm = hardwareMap.get(Servo.class, "Servoarm");
+        Drone = hardwareMap.get(Servo.class, "Drone");
         Backleft = hardwareMap.get(DcMotor.class, "Backleft");
         Backright = hardwareMap.get(DcMotor.class, "Backright");
         Frontleft = hardwareMap.get(DcMotor.class, "Frontleft");
         Frontright = hardwareMap.get(DcMotor.class, "Frontright");
+        Hook = hardwareMap.get(DcMotor.class, "Hook");
+        Hook.setDirection(DcMotorSimple.Direction.REVERSE);
+        Hook.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        Hook.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LadderLift = hardwareMap.get(DcMotor.class, "LadderLift");
-        LadderLift.setDirection(DcMotorSimple.Direction.FORWARD);
+        LadderLift.setDirection(DcMotorSimple.Direction.REVERSE);
         LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Frontleft.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -66,13 +74,13 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
     public void Mecanumdrive() {
         Frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         Backright.setDirection(DcMotorSimple.Direction.REVERSE);
-        double h = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-        double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
-        double rightX = gamepad1.right_stick_x;
-        final double v1 = h * Math.cos(robotAngle) + rightX;
-        final double v2 = h * Math.sin(robotAngle) - rightX;
-        final double v3 = h * Math.sin(robotAngle) + rightX;
-        final double v4 = h * Math.cos(robotAngle) - rightX;
+        double h = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
+        double robotAngle = Math.atan2(gamepad1.right_stick_y, gamepad1.right_stick_x) - Math.PI / 4;
+        double rightX = gamepad1.left_stick_x;
+        final double v1 = h * Math.sin(robotAngle) - rightX;
+        final double v2 = h * Math.cos(robotAngle) + rightX;
+        final double v3 = h * Math.cos(robotAngle) - rightX;
+        final double v4 = h * Math.sin(robotAngle) + rightX;
 
         Frontleft.setPower(v1);
         Frontright.setPower(v2);
@@ -161,52 +169,70 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         }
     }
     public void ladder_run_to_position0() {
-        int tgt0Position = 0;
+        int tgt0Position = 6;
         LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LadderLift.setTargetPosition(tgt0Position);
-        LadderLift.setPower(1);
+        LadderLift.setPower(0.1);
         LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         while (LadderLift.isBusy()) {
             telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
             telemetry.update();
-        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LadderLift.setPower(0);
+        }
     }
     public void ladder_run_to_position1() {
-        int tgt1Position = 2000;
+        int tgt1Position = 150;
         LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LadderLift.setTargetPosition(tgt1Position);
-        LadderLift.setPower(1);
+        LadderLift.setPower(0.5);
         LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         while (LadderLift.isBusy()) {
             telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
             telemetry.update();
-        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LadderLift.setPower(0);
+        }
     }
     public void ladder_run_to_position2() {
-        int tgt2Position = 4000;
+        int tgt2Position = 300;
         LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LadderLift.setTargetPosition(tgt2Position);
-        LadderLift.setPower(1);
+        LadderLift.setPower(0.5);
         LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         while (LadderLift.isBusy()) {
             telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
             telemetry.update();
-        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LadderLift.setPower(0);
+        }
     }
     public void ladder_run_to_position3() {
-        int tgt3Position = 6000;
+        int tgt3Position = 600;
         LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         LadderLift.setTargetPosition(tgt3Position);
-        LadderLift.setPower(1);
+        LadderLift.setPower(0.8);
         LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
         while (LadderLift.isBusy()) {
             telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
             telemetry.update();
-        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
-        LadderLift.setPower(0);
+        }
+    }
+    public void hook_run_to_high_position() {
+        int tgthPosition = 8400;
+        Hook.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Hook.setTargetPosition(tgthPosition);
+        Hook.setPower(0.6);
+        Hook.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (Hook.isBusy()) {
+            telemetry.addData("Hook Pos:", Hook.getCurrentPosition());
+            telemetry.update();
+        }
+    }
+    public void hook_run_to_lowest_position() {
+        int tgthlPosition = 40;
+        Hook.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        Hook.setTargetPosition(tgthlPosition);
+        Hook.setPower(0.6);
+        Hook.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (Hook.isBusy()) {
+            telemetry.addData("Hook Pos:", Hook.getCurrentPosition());
+            telemetry.update();
+        }
     }
 
 
@@ -233,11 +259,12 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
             if (gamepad2.a) {
                 Test.setPosition(0);
             } else if (gamepad2.b) {
-                Test.setPosition(0.25);
-            } else if (gamepad2.x) {
-                Test.setPosition(0.5);
-            } else if (gamepad2.y) {
                 Test.setPosition(1);
+            }
+            if (gamepad2.x) {
+                Servoarm.setPosition(0);
+            } else if (gamepad2.y) {
+                Servoarm.setPosition(1);
             }
 
             /** LadderLift positions */
@@ -250,6 +277,22 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
                 ladder_run_to_position2();
             } else if (gamepad2.dpad_up) {
                 ladder_run_to_position3();
+            }
+
+            /** Drone Positions */
+
+            if (gamepad2.left_bumper) {
+                Drone.setPosition(0);
+            } else if (gamepad2.right_bumper) {
+                Drone.setPosition(1);
+            }
+
+            /** Hook Positions */
+
+            if (gamepad1.dpad_up) {
+                hook_run_to_high_position();
+            } else if (gamepad1.dpad_down) {
+                hook_run_to_lowest_position();
             }
 
         }
