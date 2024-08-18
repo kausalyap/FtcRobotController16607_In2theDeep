@@ -8,13 +8,17 @@ import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
 public class ArnavOpModeDCMotor extends LinearOpMode {
+
     //private Gyroscope imu;
-    private DcMotor Backleft;
-    private DcMotor Backright;
-    private DcMotor Frontright;
-    private DcMotor Frontleft;
     //private DigitalChannel digitalTouch;
     //private DistanceSensor sensorColorRange;
+
+    private DcMotor LadderLift;
+    private DcMotor Frontright;
+    private DcMotor Frontleft;
+    private DcMotor Backleft;
+    private DcMotor Backright;
+
     private Servo Test;
 
     static final double INCREMENT = 0.01;
@@ -22,16 +26,32 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
     static final double MAX_FWD   =  1.0;
     static final double MAX_REV   = -1.0;
 
-    double power = 0;
     int cp = 0;
+    double power = 0;
+    double tgtPower = 0;
     boolean rampUp = true;
 
+    public void servo_OC() {
+        if (gamepad2.a) {
+            Test.setPosition(0);
+        } else if (gamepad2.b) {
+            Test.setPosition(0.25);
+        } else if (gamepad2.x) {
+            Test.setPosition(0.5);
+        } else if (gamepad2.y) {
+            Test.setPosition(1);
+        }
+    }
     public void init_motors() {
         Test = hardwareMap.get(Servo.class, "Test");
         Backleft = hardwareMap.get(DcMotor.class, "Backleft");
         Backright = hardwareMap.get(DcMotor.class, "Backright");
         Frontleft = hardwareMap.get(DcMotor.class, "Frontleft");
         Frontright = hardwareMap.get(DcMotor.class, "Frontright");
+        LadderLift = hardwareMap.get(DcMotor.class, "LadderLift");
+        LadderLift.setDirection(DcMotorSimple.Direction.FORWARD);
+        LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Frontleft.setDirection(DcMotorSimple.Direction.FORWARD);
         telemetry.addData("DcMotor DirectionFL", Frontleft.getDirection());
         Frontright.setDirection(DcMotorSimple.Direction.FORWARD);
@@ -52,6 +72,32 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         Frontright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Backleft.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         Backright.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        telemetry.update();
+    }
+    public void Mecanumdrive() {
+        Frontright.setDirection(DcMotorSimple.Direction.REVERSE);
+        Backright.setDirection(DcMotorSimple.Direction.REVERSE);
+        double h = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
+        double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
+        double rightX = gamepad1.right_stick_x;
+        final double v1 = h * Math.cos(robotAngle) + rightX;
+        final double v2 = h * Math.sin(robotAngle) - rightX;
+        final double v3 = h * Math.sin(robotAngle) + rightX;
+        final double v4 = h * Math.cos(robotAngle) - rightX;
+
+        Frontleft.setPower(v1);
+        Frontright.setPower(v2);
+        Backleft.setPower(v3);
+        Backright.setPower(v4);
+    }
+    public void AllMotorsFrwrd() {
+        tgtPower = gamepad1.left_stick_y;
+        Backleft.setPower(tgtPower);
+        Backright.setPower(tgtPower);
+        Frontleft.setPower(tgtPower);
+        Frontright.setPower(tgtPower);
+        telemetry.addData("Target Power", tgtPower);
+        telemetry.addData("Status", "Motors");
         telemetry.update();
     }
     public void run_to_position_FL() {
@@ -114,67 +160,97 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         } Backright.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         Backright.setPower(0);
     }
-    public void Mecanumdrive () {
-        Frontright.setDirection(DcMotorSimple.Direction.REVERSE);
-        Backright.setDirection(DcMotorSimple.Direction.REVERSE);
-        double h = Math.hypot(gamepad1.left_stick_x, gamepad1.left_stick_y);
-        double robotAngle = Math.atan2(gamepad1.left_stick_y, gamepad1.left_stick_x) - Math.PI / 4;
-        double rightX = gamepad1.right_stick_x;
-        final double v1 = h * Math.cos(robotAngle) + rightX;
-        final double v2 = h * Math.sin(robotAngle) - rightX;
-        final double v3 = h * Math.sin(robotAngle) + rightX;
-        final double v4 = h * Math.cos(robotAngle) - rightX;
-
-        Frontleft.setPower(v1);
-        Frontright.setPower(v2);
-        Backleft.setPower(v3);
-        Backright.setPower(v4);
+    public void run_to_position_FLRBLR() {
+        if (gamepad1.a) {
+            run_to_position_FL();
+        } else if (gamepad1.b) {
+            run_to_position_FR();
+        } else if (gamepad1.x) {
+            run_to_position_BL();
+        } else if (gamepad1.y) {
+            run_to_position_BR();
+        }
     }
+    public void ladder_run_to_position0() {
+        int tgt0Position = 0;
+        LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LadderLift.setTargetPosition(tgt0Position);
+        LadderLift.setPower(1);
+        LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (LadderLift.isBusy()) {
+            telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
+            telemetry.update();
+        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LadderLift.setPower(0);
+    }
+    public void ladder_run_to_position1() {
+        int tgt1Position = 2000;
+        LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LadderLift.setTargetPosition(tgt1Position);
+        LadderLift.setPower(1);
+        LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (LadderLift.isBusy()) {
+            telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
+            telemetry.update();
+        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LadderLift.setPower(0);
+    }
+    public void ladder_run_to_position2() {
+        int tgt2Position = 4000;
+        LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LadderLift.setTargetPosition(tgt2Position);
+        LadderLift.setPower(1);
+        LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (LadderLift.isBusy()) {
+            telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
+            telemetry.update();
+        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LadderLift.setPower(0);
+    }
+    public void ladder_run_to_position3() {
+        int tgt3Position = 6000;
+        LadderLift.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        LadderLift.setTargetPosition(tgt3Position);
+        LadderLift.setPower(1);
+        LadderLift.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        while (LadderLift.isBusy()) {
+            telemetry.addData("LadderPos:", LadderLift.getCurrentPosition());
+            telemetry.update();
+        } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        LadderLift.setPower(0);
+    }
+    public void ladder_run_to_positions0123() {
+        if (gamepad2.dpad_down) {
+            ladder_run_to_position0();
+        } else if (gamepad2.dpad_left) {
+            ladder_run_to_position1();
+        } else if (gamepad2.dpad_right) {
+            ladder_run_to_position2();
+        } else if (gamepad2.dpad_up) {
+            ladder_run_to_position3();
+        }
+    }
+
 
     @Override
     public void runOpMode () {
 
-        /*imu = hardwareMap.get(Gyroscope.class, "imu");
+        /** imu = hardwareMap.get(Gyroscope.class, "imu");
         digitalTouch = hardwareMap.get(DigitalChannel.class, "digitalTouch");
         sensorColorRange = hardwareMap.get(DistanceSensor.class, "sensorColorRange");
         */
+
         init_motors();
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        double tgtPower = 0;
-        //test 78
 
         waitForStart();
 
         while (opModeIsActive()) {
 
-           /* tgtPower = gamepad1.left_stick_y;
-            Backleft.setPower(tgtPower);
-            Backright.setPower(tgtPower);
-            Frontleft.setPower(tgtPower);
-            Frontright.setPower(tgtPower);
-            telemetry.addData("Target Power", tgtPower);
-            telemetry.addData("Status", "Motors");
-            telemetry.update();
-            */
+            servo_OC();
+            ladder_run_to_positions0123();
             Mecanumdrive();
-            if (gamepad1.a) {
-                run_to_position_FL();
-            } else if (gamepad1.b) {
-                run_to_position_FR();
-            } else if (gamepad1.x) {
-                run_to_position_BL();
-            } else if (gamepad1.y) {
-                run_to_position_BR();
-            } else if (gamepad2.a) {
-                Test.setPosition(0);
-            } else if (gamepad2.b) {
-                Test.setPosition(0.25);
-            } else if (gamepad2.x) {
-                Test.setPosition(0.5);
-            } else if (gamepad2.y) {
-                Test.setPosition(1);
-            }
 
         }
 
