@@ -226,6 +226,8 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
 
         while (opModeIsActive()) {
 
+            Mecanumdrive();
+
             /** servo open and close */
 
             if (gamepad2.a) {
@@ -249,8 +251,6 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
             } else if (gamepad2.dpad_up) {
                 ladder_run_to_position3();
             }
-
-            Mecanumdrive();
 
         }
 
