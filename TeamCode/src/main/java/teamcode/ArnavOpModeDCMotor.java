@@ -31,17 +31,6 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
     double tgtPower = 0;
     boolean rampUp = true;
 
-    public void servo_OC() {
-        if (gamepad2.a) {
-            Test.setPosition(0);
-        } else if (gamepad2.b) {
-            Test.setPosition(0.25);
-        } else if (gamepad2.x) {
-            Test.setPosition(0.5);
-        } else if (gamepad2.y) {
-            Test.setPosition(1);
-        }
-    }
     public void init_motors() {
         Test = hardwareMap.get(Servo.class, "Test");
         Backleft = hardwareMap.get(DcMotor.class, "Backleft");
@@ -219,17 +208,6 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         } LadderLift.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         LadderLift.setPower(0);
     }
-    public void ladder_run_to_positions0123() {
-        if (gamepad2.dpad_down) {
-            ladder_run_to_position0();
-        } else if (gamepad2.dpad_left) {
-            ladder_run_to_position1();
-        } else if (gamepad2.dpad_right) {
-            ladder_run_to_position2();
-        } else if (gamepad2.dpad_up) {
-            ladder_run_to_position3();
-        }
-    }
 
 
     @Override
@@ -248,8 +226,30 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            servo_OC();
-            ladder_run_to_positions0123();
+            /** servo open and close */
+
+            if (gamepad2.a) {
+                Test.setPosition(0);
+            } else if (gamepad2.b) {
+                Test.setPosition(0.25);
+            } else if (gamepad2.x) {
+                Test.setPosition(0.5);
+            } else if (gamepad2.y) {
+                Test.setPosition(1);
+            }
+
+            /** LadderLift positions */
+
+            if (gamepad2.dpad_down) {
+                ladder_run_to_position0();
+            } else if (gamepad2.dpad_left) {
+                ladder_run_to_position1();
+            } else if (gamepad2.dpad_right) {
+                ladder_run_to_position2();
+            } else if (gamepad2.dpad_up) {
+                ladder_run_to_position3();
+            }
+
             Mecanumdrive();
 
         }
