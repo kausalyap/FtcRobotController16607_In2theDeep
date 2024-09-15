@@ -351,6 +351,8 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         }
     }
 
+    //hi
+
           /*  if (rampUp) {
                 // Keep stepping up until we hit the max value.
                 power += INCREMENT;
