@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.Servo;
 
 @TeleOp
-public class ArnavOpModeDCMotor extends LinearOpMode {
+public class TestOpMode extends LinearOpMode {
 
     //private Gyroscope imu;
     //private DigitalChannel digitalTouch;
@@ -29,19 +29,19 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
     private Servo Test;
     private Servo Drone;
     private Servo Servoarm;
-    static final double INCREMENT = 0.01;
-    static final int CYCLE_MS = 50;
-    static final double MAX_FWD = 1.0;
-    static final double MAX_REV = -1.0;
+    //static final double INCREMENT = 0.01;
+    //static final int CYCLE_MS = 50;
+    //static final double MAX_FWD = 1.0;
+    //static final double MAX_REV = -1.0;
 
     RevHubOrientationOnRobot.LogoFacingDirection logoDirection = RevHubOrientationOnRobot.LogoFacingDirection.RIGHT;
     RevHubOrientationOnRobot.UsbFacingDirection usbDirection = RevHubOrientationOnRobot.UsbFacingDirection.UP;
     RevHubOrientationOnRobot orientationOnRobot = new RevHubOrientationOnRobot(logoDirection, usbDirection);
 
     int cp = 0;
-    double power = 0;
+    //double power = 0;
     double tgtPower = 0;
-    boolean rampUp = true;
+    //boolean rampUp = true;
 
     public void init_motors() {
         Test = hardwareMap.get(Servo.class, "Test");
@@ -83,7 +83,7 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         telemetry.update();
     }
 
-    public void Mecanumdrive() {
+   /* public void Mecanumdrive() {
         Frontright.setDirection(DcMotorSimple.Direction.REVERSE);
         Backright.setDirection(DcMotorSimple.Direction.REVERSE);
         double h = Math.hypot(gamepad1.right_stick_x, gamepad1.right_stick_y);
@@ -98,7 +98,7 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         Frontright.setPower(v2);
         Backleft.setPower(v3);
         Backright.setPower(v4);
-    }
+    }*/
 
     public void AllMotorsFrwrd() {
         tgtPower = gamepad1.left_stick_y;
@@ -181,18 +181,6 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
 
     public void Hook_Zero_Pwr_Behavior() {
         Hook.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
-    }
-
-    public void run_to_position_FLRBLR() {
-        if (gamepad1.a) {
-            run_to_position_FL();
-        } else if (gamepad1.b) {
-            run_to_position_FR();
-        } else if (gamepad1.x) {
-            run_to_position_BL();
-        } else if (gamepad1.y) {
-            run_to_position_BR();
-        }
     }
 
     public void ladder_run_to_position0() {
@@ -280,21 +268,20 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
         imu.initialize(new IMU.Parameters(orientationOnRobot));
         telemetry.addData("Status", "Initialized");
         telemetry.update();
+        telemetry.addData("Hub orientation", "Logo=%s   USB=%s\n ", logoDirection, usbDirection);
+        // Check to see if heading reset is requested
+        if (gamepad1.y) {
+            telemetry.addData("Yaw", "Resetting\n");
+            imu.resetYaw();
+        } else {
+            telemetry.addData("Yaw", "Press Y (triangle) on Gamepad to reset\n");
+        }
 
         waitForStart();
 
         while (opModeIsActive()) {
 
-            Mecanumdrive();
-
-            telemetry.addData("Hub orientation", "Logo=%s   USB=%s\n ", logoDirection, usbDirection);
-            // Check to see if heading reset is requested
-            if (gamepad1.y) {
-                    telemetry.addData("Yaw", "Resetting\n");
-                    imu.resetYaw();
-            } else {
-                    telemetry.addData("Yaw", "Press Y (triangle) on Gamepad to reset\n");
-            }
+           // Mecanumdrive();
 
             // Retrieve Rotational Angles and Velocities
             YawPitchRollAngles orientation = imu.getRobotYawPitchRollAngles();
@@ -313,11 +300,18 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
                 Test.setPosition(0);
             } else if (gamepad1.dpad_right) {
                 Test.setPosition(1);
-            }
-            if (gamepad1.left_bumper) {
+            } else if (gamepad1.left_bumper) {
                 Servoarm.setPosition(0);
             } else if (gamepad1.right_bumper) {
                 Servoarm.setPosition(1);
+            } else if (gamepad1.a) {
+                run_to_position_FL();
+            } else if (gamepad1.b) {
+                run_to_position_FR();
+            } else if (gamepad1.x) {
+                run_to_position_BL();
+            } else if (gamepad1.y) {
+                run_to_position_BR();
             }
 
             /* LadderLift positions */
@@ -390,7 +384,7 @@ public class ArnavOpModeDCMotor extends LinearOpMode {
             telemetry.update();
 */
 
-    }
+}
 
 
 
